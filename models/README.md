@@ -10,7 +10,7 @@
 
 The model weights are too large for GitHub's default file size limit. Download from:
 
-- **GitHub Release**: [Releases page](https://github.com/your-username/BTScan/releases)
+- **GitHub Release**: [Releases page](https://github.com/razahasan2000/BTScan/releases/tag/BTScan)
 - **Alternative**: Contact corresponding author (raza.hasan@solent.ac.uk)
 
 ## Verification
