@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "description": "BTScan Ablation Study Results - CORRECTED with real XAI concordance measurements",
+    "note": "Old .npy files in this directory contain legacy results without XAI metrics. This JSON contains the corrected framework.",
+    "evaluation_subset": "n=100 tumour-class test images (seed 42, glioma n=39, meningioma n=25, pituitary n=36)",
+    "full_test_set_accuracy": "93.44% (95% CI: [92.1%, 94.7%])",
+    "date_generated": "2025-11-01",
+    "source": "Recomputed from real Grad-CAM/Saliency/Occlusion/LIME attributions on deployed checkpoint"
+  },
+  "ablation_configurations": {
+    "full_sf1": {
+      "description": "Full BTScan with SF-1 fusion (deployed checkpoint)",
+      "test_accuracy_full": 0.9344,
+      "test_accuracy_subset": 0.9100,
+      "f1_weighted_full": 0.9335,
+      "f1_weighted_subset": 0.9100,
+      "parameters": 148200000,
+      "xai_concordance": {
+        "consensus_score_C": 0.116,
+        "C_std": 0.012,
+        "inter_method_IoU": 0.192,
+        "IoU_std": 0.061,
+        "inter_method_Dice": 0.258,
+        "Dice_std": 0.070,
+        "n_samples": 100,
+        "note": "Deployed model has LOWEST concordance of all 11 configurations"
+      }
+    },
+    "flattened": {
+      "description": "Concat + flatten fusion (no spatial preservation)",
+      "test_accuracy_subset": 0.9000,
+      "parameters": 145000000,
+      "xai_concordance": {
+        "consensus_score_C": 0.123,
+        "inter_method_IoU": 0.203,
+        "inter_method_Dice": 0.275
+      }
+    },
+    "concat_gap": {
+      "description": "Concat + GAP fusion",
+      "test_accuracy_subset": 0.9200,
+      "parameters": 145000000,
+      "xai_concordance": {
+        "consensus_score_C": 0.131,
+        "inter_method_IoU": 0.215,
+        "inter_method_Dice": 0.291
+      }
+    },
+    "concat_1x1": {
+      "description": "Concat + 1x1 conv fusion",
+      "test_accuracy_subset": 0.9100,
+      "parameters": 145000000,
+      "xai_concordance": {
+        "consensus_score_C": 0.138,
+        "inter_method_IoU": 0.221,
+        "inter_method_Dice": 0.302
+      }
+    },
+    "attention": {
+      "description": "Attention-based fusion",
+      "test_accuracy_subset": 0.9600,
+      "parameters": 145000000,
+      "xai_concordance": {
+        "consensus_score_C": 0.152,
+        "inter_method_IoU": 0.235,
+        "inter_method_Dice": 0.325
+      }
+    },
+    "w/o_swin": {
+      "description": "Without Swin Transformer",
+      "test_accuracy_subset": 0.8600,
+      "parameters": 80400000,
+      "xai_concordance": {
+        "consensus_score_C": 0.148,
+        "inter_method_IoU": 0.238,
+        "inter_method_Dice": 0.329
+      }
+    },
+    "w/o_resnet": {
+      "description": "Without ResNet-50",
+      "test_accuracy_subset": 0.8800,
+      "parameters": 71000000,
+      "xai_concordance": {
+        "consensus_score_C": 0.135,
+        "inter_method_IoU": 0.219,
+        "inter_method_Dice": 0.304
+      }
+    },
+    "w/o_efficientnet": {
+      "description": "Without EfficientNet-B3",
+      "test_accuracy_subset": 0.9100,
+      "parameters": 110000000,
+      "xai_concordance": {
+        "consensus_score_C": 0.128,
+        "inter_method_IoU": 0.208,
+        "inter_method_Dice": 0.284
+      }
+    },
+    "swin_only": {
+      "description": "Swin Transformer only",
+      "test_accuracy_subset": 0.8400,
+      "parameters": 28000000,
+      "xai_concordance": {
+        "consensus_score_C": 0.132,
+        "inter_method_IoU": 0.215,
+        "inter_method_Dice": 0.293
+      }
+    },
+    "resnet_only": {
+      "description": "ResNet-50 only",
+      "test_accuracy_subset": 0.8300,
+      "parameters": 25000000,
+      "xai_concordance": {
+        "consensus_score_C": 0.161,
+        "inter_method_IoU": 0.262,
+        "inter_method_Dice": 0.365
+      }
+    },
+    "efficientnet_only": {
+      "description": "EfficientNet-B3 only",
+      "test_accuracy_subset": 0.8000,
+      "parameters": 12000000,
+      "xai_concordance": {
+        "consensus_score_C": 0.145,
+        "inter_method_IoU": 0.237,
+        "inter_method_Dice": 0.328
+      }
+    }
+  },
+  "key_findings": [
+    "Fusion design has NO measurable effect on inter-method concordance (IoU range 0.203-0.262, SD = 0.017)",
+    "Deployed SF-1 model has the LOWEST concordance (IoU = 0.192) of all 11 configurations",
+    "Concordance is NOT a proxy for accuracy: r = -0.46 (p = 0.16) between accuracy and IoU",
+    "Between-run variation (0.027) exceeds between-configuration SD (0.017)",
+    "Attention fusion achieves highest accuracy (96.0% on subset) and preserves spatial structure",
+    "Re-training the identical architecture moves IoU by 0.027, confirming concordance reflects the particular trained network, not its design"
+  ],
+  "withdrawn_values": {
+    "previous_XAI_consensus": 0.7458,
+    "previous_XAI_agreement_rate": 0.964,
+    "previous_ablation_consensus": {
+      "w/o_sf1_flattened": 0.512,
+      "w/o_sf1_concat_gap": 0.698,
+      "w/o_sf1_concat_1x1": 0.712,
+      "w/o_sf1_attention": 0.938
+    },
+    "previous_ablation_agreement": {
+      "w/o_sf1_flattened": 0.78,
+      "w/o_swin": 0.92,
+      "w/o_resnet": 0.93
+    },
+    "note": "All withdrawn values were from synthetic heatmap generator, not real model attributions"
+  }
+}

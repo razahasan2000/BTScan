@@ -21,7 +21,7 @@ setup(
     description="BTScan: Spatially Preserved CNN Transformer Fusion for Multi-Method XAI Consensus in Brain Tumor MRI Classification",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/your-username/BTScan",
+    url="https://github.com/razahasan2000/BTScan",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
