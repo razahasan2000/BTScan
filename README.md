@@ -321,30 +321,6 @@ Two complementary metrics are defined:
 
 ---
 
-## Paper & Supplementary Materials
-
-### Overleaf Submission Package
-
-A complete, compilation-ready Overleaf package is available:
-- **Package**: `Overleaf_Upload.zip` (2.9 MB) — includes `main.tex`, `main_revised_highlighted.tex`, `Response_to_Reviewers.tex`, `autarticle.cls`, and all 14 figures
-- **Direct link**: This repository's Releases page or extract from source
-
-To use:
-1. Overleaf → New Project → Upload Project → select `Overleaf_Upload.zip`
-2. Compiler: **pdfLaTeX** (Main document: `main.tex`)
-3. To build tracked-changes version: Main document → `main_revised_highlighted.tex` → Recompile
-
-### Contents of the Overleaf package
-
-| File | Purpose |
-|------|---------|
-| `main.tex` | Revised manuscript (clean) |
-| `main_revised_highlighted.tex` | Tracked changes (\added, \deleted) |
-| `Response_to_Reviewers.tex` | Point-by-point reviewer response |
-| `autarticle.cls` | Journal class file (required) |
-| `figures/` | 14 figures (PNG) |
-
----
 
 ## Citation
 
